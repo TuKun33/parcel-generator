@@ -1,5 +1,6 @@
 const Bundler = require('parcel-bundler');
 const path = require('path');
+const exec = require('child_process').exec;
 const env = require('./env');
 const { deleleDirAll, getProcessArgs } = require('./utils')
 
@@ -8,11 +9,21 @@ const args = getProcessArgs()
 const dev = args.hasOwnProperty('--dev') || args.hasOwnProperty('-D')
 env.set(dev)
 
-const inputpath = args['input'] || args['i'] // pages/下的页面路径名: t
+const inputpath = args['input'] || args['i'] // pages/下的页面路径名: distribute
 const outputpath = args['output'] || args['o'] || inputpath
 
 if (!inputpath) {
   console.error('[BUILD ERROR] `input` or `i` cannot be empty for cli args!')
+  return;
+}
+
+if (dev) {
+  const command = `parcel src/pages/${inputpath}/index.html -d dist/${outputpath} --no-cache`;
+  exec(command, (error, stdout, stderr) => {
+    console.error('error ', error)
+    console.log('stdout ', stdout)
+    console.error('stderr ', stderr)
+  })
   return;
 }
 
