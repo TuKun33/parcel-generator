@@ -1,0 +1,83 @@
+/*---------  timeline-item ------------- */
+@main-color: #6a61e7;
+
+.timeline {
+  margin-bottom: 1rem;
+}
+
+.timeline-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  
+  &:first-child {
+    margin-top: 1.5rem;
+  }
+
+  &--aside {
+    // flex: 2;
+    border-right: 1px solid #ccc;
+    position: relative;
+    min-width: 9rem;
+    max-width: 9rem;
+  }
+
+  &--context {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+    p {
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 1.5;
+      border-radius: .5rem;
+      background-color: #fff;
+      padding: 1rem;
+      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .05);
+              box-shadow: 0 0 3px rgba(0, 0, 0, .05);
+    }
+  }
+
+  &--date {
+    position: relative;
+    top: .5rem;
+    div {
+      line-height: 1.5;
+
+      &.date {
+        font-size: 1.8rem;
+        color: #222;
+      }
+
+      &.time {
+        font-size: 1.4rem;
+        color: #666;
+      }
+    }
+  }
+
+  &--dot {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    right: -.78rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: @main-color;
+    border-radius: 100%;
+    border: 1px solid @main-color;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+
+    &.bg-transparent {
+      border-color: #ccc;
+      background-color: #f5f5f5;
+    }
+  }
+}

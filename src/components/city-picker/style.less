@@ -1,0 +1,30 @@
+@title-height: 4.4rem;
+
+.picker-title {
+   position: relative;
+   height: @title-height;
+   color: #333;
+   &:after {
+     content: '';
+     display: block;
+     border-bottom: 1px solid #ebebeb;
+     left: 0;
+     right: 0;
+     transform: scaleY(.5);
+   }
+   span {
+     position: absolute;
+     height: @title-height;
+     line-height: @title-height;
+     padding: 0 1.8rem;
+     font-size: 1.4rem;
+   }
+   .pt-cancel {
+     left: 0;
+     color: #999;
+   }
+   .pt-submit {
+     right: 0;
+     color: #42b983;
+   }
+ }

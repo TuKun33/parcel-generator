@@ -1,0 +1,40 @@
+
+.cancel-box {
+   background-color: transparent;
+      
+   .popup-header {
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      span {
+         font-size: 1.5rem;
+         color: #333;
+         width: 4em;
+         height: 4.3rem;
+         line-height: 4.3rem;
+         text-align: center;
+         transition: .2s color;
+         &.active {
+          color: #6A61E7;
+        }
+      }
+   }
+
+   .popup-body {
+      a {
+         display: block;
+         padding: 2rem;
+         border-top: 1px solid #f2f2f2;
+         text-align: center;
+         font-size: 1.5rem;
+         color: #333;
+         transition: .2s all;
+         &.active {
+            color: #6A61E7;
+         }
+         &:active {
+            background-color: rgba(0, 0, 0, .04);
+         }
+      }
+   }
+}

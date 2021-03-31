@@ -1,0 +1,48 @@
+@import '../../assets/cell.less';
+@import '../../assets/panel.less';
+@import '../../pages/addresses/icon.less';
+
+.address {
+   .cell {
+      padding: 1.5rem;
+   }
+   .cell::before {
+      display: none;
+   }
+   .cell_body {
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+   }
+   .address-header {
+      span {
+         font-size: 1.4rem;
+      }
+   }
+   .address-footer {
+      position: relative;
+      &::before {
+         content: ' ';
+         height: 1px;
+         margin: 0;
+         border-top: 1px solid #eee;
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         width: 100%;
+      }
+      .address-actions {
+         span {
+            margin: 0 1.9rem;
+            color: #999;
+            font-size: 1.3rem;
+         }
+      }
+   }
+}
+
+.icon-location {
+   font-size: 2rem;
+   color: #333;
+}

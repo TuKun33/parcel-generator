@@ -1,0 +1,125 @@
+@charset utf-8;
+
+html { font-size: 2.66vw; }
+* { margin: 0;padding: 0; font-size: 1.4rem; box-sizing: border-box; font-family: "经典中圆" }
+input {
+-webkit-transform: translateZ(0); -moz-transform: translateZ(0); -ms-transform: translateZ(0); -o-transform: translateZ(0); transform: translateZ(0);
+}
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background: -webkit-gradient(linear, left top, left bottom, from(#71d0f0), to(#69bdfd));
+	background: linear-gradient(to bottom, #71d0f0, #69bdfd);
+	padding-bottom: 4rem;
+}
+header {
+	flex: 1;
+	background-color: #71d0f0;
+}
+footer {
+	flex: 1;
+	background-color: #69bdfb;
+}
+.placeholde {
+	color:#d8f2fb;
+	letter-spacing: .1rem;
+}
+
+.container {
+	position: relative;
+}
+.bg {
+	width: 100%;
+	display: block;
+}
+.form {
+	position: absolute;
+	top: 45%;
+	width: 80%;
+	left: 10%;
+	background-color: #fff;
+	border-radius: 1.4rem;
+	box-shadow: 0 .5rem 1rem #48a6ee;
+	padding: 2rem 0;
+	text-align: center;
+	&-header-en {
+		font-size: 1.2rem;
+		letter-spacing: .3rem;
+		color: #d8777b;
+		font-weight: lighter;
+	}
+	&-header-zh {
+		font-size: 2.2rem;
+		word-spacing: .5rem;
+		color: #d8777b;
+		letter-spacing: .34rem;
+		font-weight: bold;
+		line-height: 1.5;
+	}
+	&-body {
+		padding: 3rem 0 1rem;
+	}
+	&-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 5rem 1.2rem;
+		border-radius: 1.2rem;
+		background-color: #76d3fe;
+		box-shadow: 0 0 .4rem rgba(255, 255, 255, .6) inset;
+		input {
+			border: none;
+			outline: none;
+			font-size: 1.3rem;
+			padding: .9rem 1rem;
+			padding-left: 0;
+			background-color: transparent;
+			line-height: 1;
+			flex: 2;
+			width: 1rem;
+			color: #fff;
+			&::-moz-placeholde { .placeholde }
+			&::-ms-input-placeholder { .placeholde }
+			&::-webkit-input-placeholder { .placeholde }
+		}
+		&_label {
+			flex: 1;
+			line-height: 1;
+			.icon {
+				height: 1.5em;
+				display: block;
+				margin: auto;
+			}
+		}
+		&.submit {
+			background-color: #fa837b;
+			box-shadow: 0 0 .5rem rgba(255, 255, 255, .8) inset;
+		}
+		&_submit {
+			border: none;
+			display: block;
+			outline: none;
+			background-color: transparent;
+			color: #fff;
+			font-size: 2.8rem;
+			line-height: 1.8;
+			letter-spacing: .4rem;
+		}
+	}
+}
+
+.copyright {
+	position: absolute;
+	top: 97%;
+	display: block;
+	width: 100%;
+	p {
+		font-size: 1.1rem;
+		color: #d8f2fb;
+		letter-spacing: .2rem;
+		text-align: center;
+		line-height: 1.6;
+		font-weight: 100;
+	}
+}

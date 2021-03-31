@@ -1,0 +1,116 @@
+@picker-height: 27rem;
+@panel-padding: 2.4rem;
+@panel-mask-height: 7.2rem;
+@picker-item-height: 3.8rem;
+/* fade */
+.fade-enter, .fade-leave-to {
+   opacity: 0;
+ }
+ .fade-enter-active, .fade-leave-active {
+   transition: all .3s ease;
+ }
+ /* slide */
+ .slide-enter, .slide-leave-to {
+   opacity: 0.5;
+   transform: translate3d(0, @picker-height, 0)
+ }
+ .slide-enter-active, .slide-leave-active {
+   transition: all .3s ease;
+ }
+ .mask {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 9999;
+   background: rgba(0,0,0,.2);
+ }
+ .picker {
+   position: fixed;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   height: @picker-height;
+   z-index: 10000;
+   background: #fff;
+ }
+ 
+ .picker-panel {
+   position: relative;
+   height: 22.6rem;
+   padding: @panel-padding 0;
+   box-sizing: border-box;
+   .picker-mask-top, .picker-mask-bottom {
+     position: absolute;
+     left: 0;
+     right: 0;
+     height: @panel-mask-height;
+     background: #fff;
+     transform: translateZ(0);
+     z-index: 1;
+     pointer-events: none;
+   }
+   .picker-mask-top {
+     top: @panel-padding;
+     background: linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.5));
+     &:after {
+       content: '';
+       display: block;
+       position: absolute;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       border-bottom: 1px solid #ebebeb;
+       transform: scaleY(.5);
+     }
+   }
+   .picker-mask-bottom {
+     bottom: @panel-padding;
+     background: linear-gradient(to top, rgba(255,255,255,.9), rgba(255,255,255,.5));
+     &:before {
+       content: '';
+       display: block;
+       position: absolute;
+       left: 0;
+       right: 0;
+       top: 0;
+       border-bottom: 1px solid #ebebeb;
+       transform: scaleY(.5);
+     }
+   }
+   .picker-mask-center {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: @picker-item-height;
+      top: @panel-mask-height + @panel-padding;
+      background-color: #F9FAFF;
+      transform: translateZ(0);
+      z-index: -1;
+      pointer-events: none;
+   }
+ }
+ .picker-wheel-wrapper {
+   padding: 0 1.2rem;
+   display: flex;
+   align-items: stretch;
+   height: 100%;
+   .picker-wheel {
+     flex: 1;
+     overflow: hidden;
+   }
+   .wheel-scroll {
+     margin-top: @panel-mask-height;
+     .wheel-item {
+       height: @picker-item-height;
+       line-height: @picker-item-height;
+       font-size: 1.4rem;
+       text-align: center;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       white-space: nowrap;
+       color: #333;
+     }
+   }
+ }

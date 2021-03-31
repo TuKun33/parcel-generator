@@ -1,0 +1,46 @@
+.swiper {
+   overflow: hidden;
+   position: relative;
+   .swiper-items-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      & > div {
+         position: absolute;
+         transform: translateX(-100%);
+         width: 100%;
+         height: 100%;
+         display: none;
+         z-index: 10;
+         &.is-active {
+            display: block;
+            transform: none;
+         }
+      }
+      .swiper-item {
+         width: 100%;
+         > * {
+           width: 100%; 
+         }
+      }
+   }
+   .swiper-indicators {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 11;
+      .swiper-indicator {
+         width: .6rem;
+         height: .6rem;
+         display: inline-block;
+         border-radius: 100%;
+         background: #D8D8D8;
+         margin: 0 .4rem;
+         &.is-active {
+            background: #fff;
+         }
+      }
+   }
+}
+

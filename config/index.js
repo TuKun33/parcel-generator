@@ -1,12 +1,14 @@
 const Bundler = require('parcel-bundler');
 const path = require('path');
-const exec = require('child_process').exec;
+const spawn = require('child_process').spawn;
 const env = require('./env');
 const { deleleDirAll, getProcessArgs } = require('./utils')
 
-const args = getProcessArgs()
+const args = getProcessArgs();
+// 直接从npm命令里取参数
+const npmArgvs = JSON.parse(process.env.npm_config_argv).original;
 // 是否是开发环境
-const dev = args.hasOwnProperty('--dev') || args.hasOwnProperty('-D')
+const dev = args.hasOwnProperty('--dev') || args.hasOwnProperty('-D') || npmArgvs.includes('--dev') || npmArgvs.includes('-D');
 env.set(dev)
 
 const inputpath = args['input'] || args['i'] // pages/下的页面路径名: distribute
@@ -14,16 +16,29 @@ const outputpath = args['output'] || args['o'] || inputpath
 
 if (!inputpath) {
   console.error('[BUILD ERROR] `input` or `i` cannot be empty for cli args!')
-  return;
+  // return;
 }
 
 if (dev) {
-  const command = `parcel src/pages/${inputpath}/index.html -d dist/${outputpath} --no-cache`;
-  exec(command, (error, stdout, stderr) => {
-    console.error('error ', error)
-    console.log('stdout ', stdout)
-    console.error('stderr ', stderr)
-  })
+  const command = inputpath
+    ? `parcel src/pages/${inputpath}/index.html -d dist/${outputpath} --no-cache`
+    : `parcel src/pages/**/index.html -d dist/** --no-cache`;
+
+  // const worker = exec(command, {})
+  spawn(command, {
+    shell: true, stdio: 'inherit'
+  });
+  
+  // worker.stdout && worker.stdout.on('data', function (data) {
+  //   console.log(data);
+  // });
+  // worker.stderr && worker.stderr.on('data', function (data) {
+  //   console.error(data);
+  // });
+  // worker.error && worker.error.on('data', function (data) {
+  //   console.error(data);
+  // });
+
   return;
 }
 

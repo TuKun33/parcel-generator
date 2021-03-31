@@ -1,0 +1,129 @@
+@import '../../assets/variable.less';
+@import './icon.less';
+
+.align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #f2f2f2;
+  background-color: #fff;
+  .action-left {
+     flex: 1;
+     height: @footer-height;
+     .align-center;
+     color: #A0A0A0;
+     flex-direction: column;
+     span {
+        line-height: 2;
+        font-size: 1.5rem;
+     }
+     .icon {
+        color: #888;
+     }
+  }
+  .action-right {
+     flex: 3;
+     height: @footer-height;
+     background-color: @main-color;
+     color: #fff;
+     font-size: 1.7rem;
+     font-weight: 700;
+     .align-center;
+  }
+}
+
+.popup-header {
+  padding: 1rem 0;
+  position: relative;
+  text-align: center;
+  border-bottom: 1px solid #f2f2f2;
+  .icon {
+     position: absolute;
+     right: 1rem;
+  }
+}
+.popup-body {
+  display: flex;
+  padding: 2rem 1rem;
+  .item {
+     flex: 1;
+     margin: .5rem;
+     border-radius: .6rem;
+     border: 1px solid #e1e1e1;
+     padding: 2.5rem .5rem;
+     &.active {
+        border: 1px solid @main-color;
+        background-color: #F7F7FE;
+        transition: .2s;
+        div {
+           transition: .2s;
+           &.duration {
+              color: #bab6f4;
+           }
+           &.price {
+              color: @main-color;
+           }
+           &.old-price {
+              color: #bebaf4;
+           }
+        }
+     }
+     &.disabled {
+        opacity: .5;
+        .price {
+           color: #aaa;
+        }
+     }
+     div {
+        line-height: 2;
+        text-align: center;
+        &.duration {
+           font-size: 1.2rem;
+           color: #666;
+        }
+        &.price {
+           font-size: 2rem;
+           color: #f33d58;
+           font-weight: bold;
+           i {
+              font-style: normal;
+              font-size: 1rem;
+           }
+        }
+        &.old-price {
+           color: #ccc;
+           text-decoration:line-through;
+           font-size: 1.1rem;
+        }
+     }
+  }
+}
+.popup-footer {
+  background-color: @main-color;
+  height: @footer-height;
+  .align-center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.icon-close {
+  width: 1.7rem;
+  height: 1.7rem;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: #444;
+}
+.icon-customer {
+  width: 2rem;
+  height: 2rem;
+  font-size: 2.2rem;
+}

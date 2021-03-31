@@ -4,13 +4,14 @@
   "description": "parcel generator",
   "main": "index.js",
   "scripts": {
-    "dev-t": "node config/index i=t --dev",
-    "t": "node config/index i=t"
+    "t": "node config/index i=t",
+    "appoint": "node config/index i=appoint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "vue": "^2.6.10",
     "vuex": "^3.1.1"
   },
@@ -27,7 +28,7 @@
     "babel-preset-es2015": "^6.24.1",
     "cssnano": "^4.0.3",
     "less": "^3.7.1",
-    "parcel-bundler": "^1.12.3",
+    "parcel-bundler": "^1.12.4",
     "vue-hot-reload-api": "^2.3.3",
     "vue-template-compiler": "^2.6.10"
   }
