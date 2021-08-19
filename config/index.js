@@ -1,10 +1,14 @@
 const Bundler = require('parcel-bundler');
 const path = require('path');
-const spawn = require('child_process').spawn;
+const fs = require('fs');
+const { exec, spawn } = require('child_process');
 const env = require('./env');
+const config = require('./build');
+const vueDevtoolsScript = '<script src="http://localhost:8098"></script>';
 const { deleleDirAll, getProcessArgs } = require('./utils')
 
 const args = getProcessArgs();
+
 // 直接从npm命令里取参数
 const npmArgvs = JSON.parse(process.env.npm_config_argv).original;
 // 是否是开发环境
@@ -20,11 +24,22 @@ if (!inputpath) {
 }
 
 if (dev) {
-  const command = inputpath
-    ? `parcel src/pages/${inputpath}/index.html -d dist/${outputpath} --no-cache`
-    : `parcel src/pages/**/index.html -d dist/** --no-cache`;
+  
+  require('./proxy/app.js')();
 
-  // const worker = exec(command, {})
+  const command = inputpath
+    ? `parcel src/pages/${inputpath}/index.html -d dist/${outputpath} --no-cache --port ${config.devServer.port}`
+    : `parcel src/pages/**/index.html -d dist/** --no-cache --port ${config.devServer.port}`;
+
+  // starting vue-devtools
+  const indexHtml = path.join(config.input.baseDir, inputpath, 'index.html');
+  const indexHtmlContent = fs.readFileSync(indexHtml, 'utf8');
+  if (!indexHtmlContent.includes(vueDevtoolsScript)) {
+    // fs.appendFileSync(indexHtml, vueDevtoolsScript);
+    fs.writeFileSync(indexHtml, indexHtmlContent.replace('<head>', `<head>${vueDevtoolsScript}`))
+  }
+  exec('vue-devtools', {});
+
   spawn(command, {
     shell: true, stdio: 'inherit'
   });
@@ -42,7 +57,6 @@ if (dev) {
   return;
 }
 
-const config = require('./build')
 const outFilename = config.input.filename || 'index.html'
 
 const entryFiles = path.join(config.input.baseDir, inputpath, outFilename)
@@ -51,7 +65,7 @@ const outDir = path.join(config.output.baseDir, outputpath)
 
 // 清空输出目录
 !dev && deleleDirAll(outDir)
-// console.log(process.env.NODE_ENV)
+console.log(process.env.NODE_ENV)
 // console.log(outFilename,'\n', outDir)
 // console.log(config)
 // return; 
@@ -66,8 +80,10 @@ const options = {
   minify: !dev,
   hmr: dev,
   sourceMaps: true,
-  scopeHoist: !dev,
+  scopeHoist: false, //!dev,
 }
+
+fs.writeFileSync(entryFiles, fs.readFileSync(entryFiles, 'utf-8').replace(vueDevtoolsScript, ''));
 
 const bundler = new Bundler(entryFiles, options);
 
@@ -82,5 +98,5 @@ bundler.on('bundled', (bundler) => {
 const bundle = bundler.bundle();
 
 if (dev) {
-  bundler.serve(config.devServer.port || 1234)
+  bundler.serve(config.devServer.port || 1234);
 }

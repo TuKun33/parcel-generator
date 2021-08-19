@@ -11,7 +11,7 @@ module.exports = {
     publicUrl: isDev() ? '/' : './', // 静态资源相对 index.html 的路径
   },
   devServer: {
-    port: 1234,
+    port: 1236,
     proxyTable: {
 
     }
